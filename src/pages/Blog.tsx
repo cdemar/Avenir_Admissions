@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
+
+const sanitize = (html: string) =>
+  typeof window !== "undefined" ? DOMPurify.sanitize(html) : html;
 import { blogData } from "../data/blogData";
 import SEO from "../components/SEO";
 import type { BlogPost } from "../types";
@@ -104,7 +108,7 @@ const BlogPostPage = () => {
         </p>
 
         <div className="prose lg:prose-xl max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitize(post.content) }} />
         </div>
 
         <div className="mt-12">
