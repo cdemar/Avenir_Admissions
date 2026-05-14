@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Libre+Baskerville&display=swap");
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* This is for the Headers */
+  --font-libre: "Libre Baskerville", Georgia, serif;
+  /* This is for the Body */
+  --font-inter: "Inter", Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @apply bg-gray-50 text-gray-800 font-inter;
+}
+
+.btn {
+  @apply bg-amber-400 hover:bg-amber-500 hover:text-gray-50 font-semibold transition-colors duration-200 px-7 py-3 rounded-full;
+}
+
+.card {
+  @apply bg-neutral-100 hover:bg-blue-50 text-neutral-800 hover:text-neutral-900 p-8 rounded-lg shadow-lg flex flex-col
+  h-full items-center text-center transition duration-500 hover:scale-105;
+}
+
+.contactLine {
+  @apply block w-full px-4 py-2 border border-blue-500 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500
+  sm:text-sm placeholder-neutral-50;
+}
+
+/* --- Custom Swiper Styles --- */
+
+/* Active pagination dot color */
+.swiper-pagination-bullet-active {
+  background-color: #2563eb !important; /* Tailwind blue-600 */
+}
+
+/* Navigation arrow color */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #2563eb !important; /* Tailwind blue-600 */
+}
+
+/* On large screens (1024px and up), move the arrows further out */
+@media (min-width: 1024px) {
+  .swiper-button-next {
+    right: -2.5rem !important;
+  }
+  .swiper-button-prev {
+    left: -2.5rem !important;
+  }
+}
+
+/* On smaller screens, make the arrows slightly smaller */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 24px;
+    height: 24px;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 24px !important;
+  }
+}
+
+/* On screens smaller than 1024px, hide the dots */
+@media (max-width: 1023px) {
+  .swiper-pagination {
+    display: none !important;
+  }
+}
