@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
-
-const sanitize = (html: string) =>
-  typeof window !== "undefined" ? DOMPurify.sanitize(html) : html;
 import { blogData } from "../data/blogData";
 import SEO from "../components/SEO";
 import type { BlogPost } from "../types";
+import { BASE_URL } from "../config";
 
-const BASE_URL = "https://aveniradmissions.com";
+const sanitize = (html: string) =>
+  typeof window !== "undefined" ? DOMPurify.sanitize(html) : html;
 
 /**
  * Attempts to convert a human-readable date like "June 18th, 2025"

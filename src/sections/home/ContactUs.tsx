@@ -1,8 +1,9 @@
 import Cta from "../../components/Cta";
 import { useForm, ValidationError } from "@formspree/react";
+import { FORMSPREE_ID, CAL_LINK, PHONE } from "../../config";
 
 const ContactUs = () => {
-  const [state, handleSubmit] = useForm("meolngyl");
+  const [state, handleSubmit] = useForm(FORMSPREE_ID);
 
   return (
     <section
@@ -23,7 +24,7 @@ const ContactUs = () => {
             </div>
 
             <div className="flex justify-center lg:justify-start">
-              <Cta calLink="avenir-admissions/consultation">
+              <Cta calLink={CAL_LINK}>
                 Book a Free Consultation
               </Cta>
             </div>
@@ -32,7 +33,7 @@ const ContactUs = () => {
               <p className="text-lg">
                 Call us:{" "}
                 <a
-                  href="tel:+17073479477"
+                  href={`tel:${PHONE}`}
                   className="text-yellow-400 hover:text-yellow-500 font-semibold"
                 >
                   (707) 347-9477

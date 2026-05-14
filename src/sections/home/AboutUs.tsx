@@ -1,4 +1,5 @@
 import Cta from "../../components/Cta";
+import { CAL_LINK } from "../../config";
 
 const AboutUs = () => {
   return (
@@ -38,7 +39,7 @@ const AboutUs = () => {
             </p>
 
             <div className="flex justify-center">
-              <Cta calLink="avenir-admissions/consultation">
+              <Cta calLink={CAL_LINK}>
                 Book a Free Consultation
               </Cta>
             </div>

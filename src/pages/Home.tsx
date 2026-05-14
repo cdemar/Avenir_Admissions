@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import SEO from "../components/SEO";
+import { BASE_URL, PHONE } from "../config";
 import HeroHome from "../sections/home/HeroHome";
 import AboutUs from "../sections/home/AboutUs";
 import Service from "../sections/home/Service";
@@ -12,8 +13,8 @@ const LOCAL_BUSINESS_SCHEMA = {
   "@type": "LocalBusiness",
   name: "Avenir Admissions",
   description: "Expert college admissions consulting",
-  url: "https://aveniradmissions.com",
-  telephone: "+17073479477",
+  url: BASE_URL,
+  telephone: PHONE,
   founder: {
     "@type": "Person",
     name: "Aiden Kjeldsen",

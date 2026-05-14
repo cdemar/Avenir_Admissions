@@ -20,7 +20,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Central config — keep in sync with src/config.ts
 const BASE_URL = "https://aveniradmissions.com";
+const PHONE = "+17073479477";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -60,7 +63,7 @@ function buildJsonLd(route, blogData) {
       name: "Avenir Admissions",
       description: "Expert college admissions consulting",
       url: BASE_URL,
-      telephone: "+17073479477",
+      telephone: PHONE,
       founder: { "@type": "Person", name: "Aiden Kjeldsen" },
       serviceType: "College Admissions Consulting",
       areaServed: "United States",
@@ -129,6 +132,7 @@ function buildPageMeta(route, blogData) {
   if (!title) return { title: "Avenir Admissions", metaTags: "" };
 
   const metaTags = `
+    <link rel="canonical" href="${esc(url)}">
     <meta name="description" content="${esc(description)}">
 
     <!-- Open Graph (Facebook, Instagram, WhatsApp, LinkedIn) -->

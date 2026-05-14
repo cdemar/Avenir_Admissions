@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BASE_URL } from "../config";
 
 interface SEOProps {
   /** Full page title — will be used for document.title, og:title, and twitter:title */
@@ -11,7 +12,6 @@ interface SEOProps {
   type?: "website" | "article";
 }
 
-const BASE_URL = "https://aveniradmissions.com";
 
 /**
  * Finds an existing <meta> element by attribute+value or creates a new one,
@@ -48,6 +48,15 @@ const SEO = ({
 
     // ── Document title ────────────────────────────────────────────────────
     document.title = title;
+
+    // ── Canonical link ───────────────────────────────────────────────────
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", absoluteUrl);
 
     // ── Standard meta ────────────────────────────────────────────────────
     setMeta("name", "description", description);
