@@ -5,6 +5,8 @@ import { blogData } from "../data/blogData";
 import SEO from "../components/SEO";
 import type { BlogPost } from "../types";
 import { BASE_URL } from "../config";
+import { readingTime } from "../utils";
+import BlogCard from "../components/BlogCard";
 
 const sanitize = (html: string) =>
   typeof window !== "undefined" ? DOMPurify.sanitize(html) : html;
@@ -51,6 +53,7 @@ function buildArticleSchema(post: BlogPost) {
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogData.find((p) => p.slug === slug);
+  const related = blogData.filter((p) => p.slug !== slug).slice(-3).reverse();
 
   useEffect(() => {
     if (!post) return;
@@ -95,6 +98,9 @@ const BlogPostPage = () => {
           src={post.image}
           alt={post.title}
           className="w-full h-96 object-cover rounded-lg mb-8"
+          loading="eager"
+          width={896}
+          height={384}
         />
         <h1 className="text-blue-900 font-bold text-4xl md:text-5xl mb-4">
           {post.title}
@@ -103,7 +109,7 @@ const BlogPostPage = () => {
           {post.subTitle}
         </h2>
         <p className="text-gray-500 text-lg mb-8">
-          {post.author} • {post.date}
+          {post.author} • {post.date} • {readingTime(post.content)} min read
         </p>
 
         <div className="prose lg:prose-xl max-w-none">
@@ -114,6 +120,15 @@ const BlogPostPage = () => {
           <Link to="/blogs" className="text-blue-600 hover:underline">
             &larr; Back to all posts
           </Link>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl mt-16">
+        <h2 className="text-blue-900 font-bold text-3xl mb-8">More Posts</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {related.map((p) => (
+            <BlogCard key={p.id} post={p} />
+          ))}
         </div>
       </div>
     </article>

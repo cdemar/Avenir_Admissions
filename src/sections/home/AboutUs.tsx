@@ -50,6 +50,7 @@ const AboutUs = () => {
               src="/aiden_photo.png"
               alt="Aiden Kjeldsen, founder of Avenir Admissions"
               className="rounded-lg shadow-xl w-full h-auto"
+              loading="lazy"
             />
           </div>
         </div>

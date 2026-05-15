@@ -5,6 +5,8 @@ import NotFoundPage from "./components/NotFoundPage";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/Blog";
 import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 
 /**
  * The full route tree — no Router wrapper so it can be used with
@@ -25,6 +27,8 @@ export function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </main>

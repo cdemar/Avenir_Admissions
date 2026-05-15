@@ -5,7 +5,7 @@ import { RiMenuLine, RiCloseFill } from "react-icons/ri";
 const navLinks = [
   { to: "/#hero", id: "hero", label: "Home" },
   { to: "/#about", id: "about", label: "About" },
-  { to: "/#service", id: "service", label: "Services" },
+  { to: "/services", id: "services", label: "Services" },
   { to: "/#blog", id: "blog", label: "Blog" },
 ];
 
@@ -57,6 +57,8 @@ const Navbar = () => {
 
     if (pathname.startsWith("/blogs") || pathname.startsWith("/blog/")) {
       setActiveLink("blog");
+    } else if (pathname.startsWith("/services")) {
+      setActiveLink("services");
     } else {
       const observerOptions = {
         root: null,
@@ -115,7 +117,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <Link to="/#contact" className="btn hidden lg:block">
+        <Link to="/contact" className="btn hidden lg:block">
           Contact Us
         </Link>
 
@@ -148,7 +150,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              to="/#contact"
+              to="/contact"
               onClick={handleLinkClick}
               className="btn w-full text-center block"
             >

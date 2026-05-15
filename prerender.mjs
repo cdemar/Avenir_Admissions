@@ -115,6 +115,18 @@ function buildPageMeta(route, blogData) {
     image       = `${BASE_URL}/logo.jpg`;
     url         = `${BASE_URL}/blogs`;
     type        = "website";
+  } else if (route === "/services") {
+    title       = "Our Services | Avenir Admissions";
+    description = "Expert college admissions consulting for 9th–12th grade students, transfer applicants, and international students. Personalized guidance at every stage.";
+    image       = `${BASE_URL}/logo.jpg`;
+    url         = `${BASE_URL}/services`;
+    type        = "website";
+  } else if (route === "/contact") {
+    title       = "Contact Us | Avenir Admissions";
+    description = "Get in touch with Avenir Admissions. Book a free consultation or send us a message — we'd love to hear from you.";
+    image       = `${BASE_URL}/logo.jpg`;
+    url         = `${BASE_URL}/contact`;
+    type        = "website";
   } else if (route.startsWith("/blog/")) {
     const slug = route.slice("/blog/".length);
     const post = blogData.find((p) => p.slug === slug);
@@ -163,7 +175,7 @@ const slugs = [...blogDataSrc.matchAll(/slug:\s*["']([^"']+)["']/g)].map(
   (m) => m[1]
 );
 
-const routes = ["/", "/blogs", ...slugs.map((s) => `/blog/${s}`)];
+const routes = ["/", "/blogs", "/services", "/contact", ...slugs.map((s) => `/blog/${s}`)];
 console.log(`\n🔨  Pre-rendering ${routes.length} routes...\n`);
 
 // ---------------------------------------------------------------------------
