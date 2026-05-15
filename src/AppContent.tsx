@@ -13,13 +13,21 @@ import Home from "./pages/Home";
 export function AppContent() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-blue-900 focus:font-semibold focus:rounded focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <Navbar />
+      <main id="main-content">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
       <Footer />
     </>
   );

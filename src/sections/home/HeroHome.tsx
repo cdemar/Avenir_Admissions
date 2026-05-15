@@ -4,6 +4,8 @@ const HeroHome = () => {
       <div
         className="relative h-full w-full bg-cover bg-center"
         style={{ backgroundImage: `url("people_throwing_hats_on_air.jpg")` }}
+        role="img"
+        aria-label="Graduates celebrating by throwing their caps in the air"
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
 

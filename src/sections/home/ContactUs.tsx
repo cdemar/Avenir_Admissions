@@ -70,6 +70,7 @@ const ContactUs = () => {
                       placeholder="First Name"
                       className="block w-full px-4 py-3 rounded-md bg-blue-700 border border-transparent focus:outline-none focus:ring-2 focus:ring-neutral-50"
                       required
+                      aria-required="true"
                     />
                     <input
                       type="text"
@@ -78,6 +79,7 @@ const ContactUs = () => {
                       placeholder="Last Name"
                       className="block w-full px-4 py-3 rounded-md bg-blue-700 border border-transparent focus:outline-none focus:ring-2 focus:ring-neutral-50"
                       required
+                      aria-required="true"
                     />
                   </div>
                 </div>
@@ -96,13 +98,18 @@ const ContactUs = () => {
                     placeholder="your.email@example.com"
                     className="block w-full px-4 py-3 rounded-md bg-blue-700 border border-transparent focus:outline-none focus:ring-2 focus:ring-neutral-50"
                     required
+                    aria-required="true"
+                    aria-describedby="email-error"
+                    aria-invalid={state.errors != null || undefined}
                   />
-                  <ValidationError
-                    prefix="Email"
-                    field="email"
-                    errors={state.errors}
-                    className="text-yellow-400 mt-2 text-sm"
-                  />
+                  <div id="email-error" role="alert">
+                    <ValidationError
+                      prefix="Email"
+                      field="email"
+                      errors={state.errors}
+                      className="text-yellow-400 mt-2 text-sm"
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -119,13 +126,18 @@ const ContactUs = () => {
                     placeholder="How can we help?"
                     className="block w-full px-4 py-3 rounded-md bg-blue-700 border border-transparent focus:outline-none focus:ring-2 focus:ring-neutral-50"
                     required
+                    aria-required="true"
+                    aria-describedby="message-error"
+                    aria-invalid={state.errors != null || undefined}
                   ></textarea>
-                  <ValidationError
-                    prefix="Message"
-                    field="message"
-                    errors={state.errors}
-                    className="text-yellow-400 mt-2 text-sm"
-                  />
+                  <div id="message-error" role="alert">
+                    <ValidationError
+                      prefix="Message"
+                      field="message"
+                      errors={state.errors}
+                      className="text-yellow-400 mt-2 text-sm"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex items-center">

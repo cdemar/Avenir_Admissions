@@ -1,5 +1,8 @@
 import { testimonialData } from "../../data/testimonialData";
 import { Swiper, SwiperSlide } from "swiper/react";
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -23,7 +26,7 @@ const Testimonials = () => {
           pagination={{ clickable: true }}
           navigation={true}
           loop={true}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoplay={prefersReducedMotion ? false : { delay: 5000, disableOnInteraction: false }}
           modules={[Keyboard, Pagination, Navigation, Autoplay]}
           className="w-full h-auto pb-12"
         >

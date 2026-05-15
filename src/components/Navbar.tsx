@@ -123,13 +123,15 @@ const Navbar = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="lg:hidden text-gray-50 text-3xl focus:outline-none"
           aria-label="Toggle mobile menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {isMobileMenuOpen ? <RiCloseFill /> : <RiMenuLine />}
         </button>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-blue-800 py-4 mt-2 rounded-lg shadow-xl">
+        <div id="mobile-menu" className="lg:hidden bg-blue-800 py-4 mt-2 rounded-lg shadow-xl">
           <div className="container mx-auto px-4 space-y-3">
             {navLinks.map((link) => (
               <Link
