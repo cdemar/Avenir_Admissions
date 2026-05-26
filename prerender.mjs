@@ -22,7 +22,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Central config — keep in sync with src/config.ts
-const BASE_URL = "https://aveniradmissions.com";
+const BASE_URL = "https://www.aveniradmissions.com";
 const PHONE = "+17073479477";
 
 // ---------------------------------------------------------------------------
