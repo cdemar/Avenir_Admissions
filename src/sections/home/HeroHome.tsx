@@ -1,6 +1,6 @@
 const HeroHome = () => {
   return (
-    <section id="hero" className="h-[110%] w-full">
+    <section id="hero" className="h-screen w-full">
       <div
         className="relative h-full w-full bg-cover bg-center"
         style={{ backgroundImage: `url("people_throwing_hats_on_air.jpg")` }}

@@ -22,7 +22,7 @@ export function AppContent() {
         Skip to main content
       </a>
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" className="min-h-screen">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
