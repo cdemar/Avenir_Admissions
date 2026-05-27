@@ -7,6 +7,7 @@ import BlogPost from "./pages/Blog";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 
 /**
  * The full route tree — no Router wrapper so it can be used with
@@ -21,6 +22,7 @@ export function AppContent() {
       >
         Skip to main content
       </a>
+      <ScrollToTop />
       <Navbar />
       <main id="main-content" className="min-h-screen">
       <Routes>
