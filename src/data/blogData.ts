@@ -225,7 +225,6 @@ export const blogData: BlogPost[] = [
       <li><b>The Davis Farmers Market</b> – Wednesdays and Saturdays.</li>
       <li><b>Sophia’s Thai Kitchen</b> – Great Thai food and a fun rooftop bar vibe in summer.</li>
       <li><b>Yakitori Shoukudo</b> – Great Japanese food and excellent ramen.</li>
-      <li><b>The Davis Farmers Market</b> – Wednesdays and Saturdays</li>
      </ul>
     `,
   },
@@ -400,7 +399,7 @@ export const blogData: BlogPost[] = [
       </ul>
 
       <h3>Important 2025 Update</h3>
-      <p>Stanford will <b>reinstate the required SAT/ACT submission</b> starting with the Fall 2026 application cycle. Students applying for the Class of 2029 and beyond should plan to submit strong standardized test scores. For more details, visit <a href="https://admission.stanford.edu/">Stanford's official admissions website</a>.
+      <p>Stanford will <b>reinstate the required SAT/ACT submission</b> starting with the Fall 2026 application cycle. Students applying for the Class of 2029 and beyond should plan to submit strong standardized test scores. For more details, visit <a href="https://admission.stanford.edu/">Stanford's official admissions website</a>.</p>
 
       <h2>What Does Stanford University Look For?</h2>
       <p>Since nearly all Stanford applicants are academically excellent, the admissions committee looks deeper than just grades and scores. According to Stanford's Common Data Set, here are the factors considered in application review:</p>
@@ -513,7 +512,7 @@ export const blogData: BlogPost[] = [
       <p>Choose recommenders who know you well and can speak authentically to your strengths and growth.</p>
       
       <h3>Restrictive Early Action (REA)</h3>
-      <p>Stanford offers <b>Restrictive Early Action</b> with a November 1 deadline. While not binding (you can apply to other schools later), REA applicants historically have shown higher acceptance rates [cite: 283][cite_start]—though this may partly reflect self-selection of highly qualified candidates.</p>
+      <p>Stanford offers <b>Restrictive Early Action</b> with a November 1 deadline. While not binding (you can apply to other schools later), REA applicants historically have shown higher acceptance rates — though this may partly reflect self-selection of highly qualified candidates.</p>
       <p>REA is a good choice if:</p>
       <ul>
         <li>Stanford is genuinely your top-choice school</li>
@@ -792,7 +791,7 @@ export const blogData: BlogPost[] = [
             <li><strong>Resilience:</strong> Reflect on overcoming setbacks.</li>
             <li><strong>Impact:</strong> Detail contributions to your school, community, or family.</li>
         </ul>
-        <p>Check out our <a target="_blank" href="https://example.com/uc-piq-tips">guide to brainstorming PIQs</a> for more inspiration. Strong essays provide context for your achievements and make your application memorable.<p>
+        <p>Strong essays provide context for your achievements and make your application memorable.</p>
 
         <h2>6. Your Action Plan for UC Applications</h2>
 
@@ -851,7 +850,7 @@ export const blogData: BlogPost[] = [
         <p>Start brainstorming now. Write multiple drafts to refine your story. Aim for authenticity—admissions officers want to hear your voice, not a polished template.</p>
 
         <h3>Choose Your UC Campuses</h3>
-        <p>Research campuses like UC San Diego or UC Davis to find the best fit for your goals. Each has unique strengths—e.g., UCLA for film, UC Berkeley for engineering. See our <a target="_blank" href="https://example.com/uc-campus-guide">UC campus comparison</a>.</p>
+        <p>Research campuses like UC San Diego or UC Davis to find the best fit for your goals. Each has unique strengths—e.g., UCLA for film, UC Berkeley for engineering.</p>
 
         <h3>Submit by December 1, 2025</h3>
         <p>The UC application deadline is <strong>December 1, 2025, at 11:59 p.m. PST</strong> (extended due to Thanksgiving). Submit early to avoid technical glitches.</p>
@@ -875,9 +874,9 @@ export const blogData: BlogPost[] = [
             <li><a target="_blank" href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html">UC Application Personal Insight Questions - Official Guide</a></li>
             <li><a target="_blank" href="https://rogerhub.com/gpa-calculator-uc/">UC GPA Calculator - Calculate Your Weighted GPA</a></li>
             <li><a target="_blank" href="https://admission.universityofcalifornia.edu/admission-requirements/freshman-requirements/subject-requirement-a-g.html">UC A-G Course Requirements - Complete List</a></li>
-            <li><a target="_blank" href="https://aveniradmission.com/blog/Ultimate_Guide_to_the_UC_Schools">How to Choose Your UC Campuses - Campus Comparison Guide</a></li>
-            <li><a target="_blank" href="https://aveniradmission.com/blog/write-best-college-essay">Complete Guide to Writing Standout College Essays</a></li>
-            <li><a target="_blank" href="https://aveniradmission.com/blog/stanford-university-admission-guide">How to Get Into Stanford University</a></li>
+            <li><a target="_blank" href="https://www.aveniradmissions.com/blog/Ultimate_Guide_to_the_UC_Schools">How to Choose Your UC Campuses - Campus Comparison Guide</a></li>
+            <li><a target="_blank" href="https://www.aveniradmissions.com/blog/write-best-college-essay">Complete Guide to Writing Standout College Essays</a></li>
+            <li><a target="_blank" href="https://www.aveniradmissions.com/blog/stanford-university-admission-guide">How to Get Into Stanford University</a></li>
         </ul>
     `,
   },
@@ -1152,9 +1151,9 @@ export const blogData: BlogPost[] = [
       <li>English proficiency: Demonstrated through essays, interviews, and optionally TOEFL/Duolingo (required for non-native speakers from non-English-medium schools)</li>
       <li>Context-appropriate activities: Leadership and impact within your local community/school system</li>
     </ul>
-    <p><strong>Key Points:
+    <p><strong>Key Points:</strong></p>
     <ul>
-      <li></strong> No SAT/AP expectation if unavailable in your region.</li>
+      <li>No SAT/AP expectation if unavailable in your region.</li>
       <li>Columbia understands limited extracurricular infrastructure—focus on what you created or pursued independently.</li>
       <li>Financial aid is need-aware for international students (more competitive), but full demonstrated need is met if admitted.</li>
     </ul>
@@ -1321,7 +1320,7 @@ export const blogData: BlogPost[] = [
       <li>Essays that show contribution</li>
       <li>Polished, confident writing</li>
     </ul>
-    <p>If you want individualized guidance on building a Columbia-ready application, including essay strategy and full application positioning, book a free 20-minute strategy session @ aveniradmissions.com or follow my Instagram for weekly college maps and application tips!</p>
+    <p>If you want individualized guidance on building a Cornell-ready application, including essay strategy and full application positioning, book a free 20-minute strategy session @ aveniradmissions.com or follow my Instagram for weekly college maps and application tips!</p>
     `,
   },
   {
@@ -1396,7 +1395,7 @@ export const blogData: BlogPost[] = [
     <p>The Academic Index generally reflects:</p>
     <ul>
       <li><strong>Course rigor</strong> relative to what your school offers</li>
-      <li><strong>Grades and academic trajectory</string></li>
+      <li><strong>Grades and academic trajectory</strong></li>
       <li><strong>Standardized test scores</strong> (SAT or ACT required for 2025-2026)</li>
       <li><strong>Academic context</strong>, including school profile or national curriculum</li>
     </ul>
@@ -1657,7 +1656,7 @@ export const blogData: BlogPost[] = [
   <ul>
     <li>Overall admit rate: <strong>~6–7%</strong></li>
     <li>Early Decision admit rate: <strong>~20–25%</strong></li>
-    <li>→ A <strong>3–4× admissions advantage</striong></li>
+    <li>→ A <strong>3–4× admissions advantage</strong></li>
   </ul>
   <p>Early Decision sends a powerful signal:</p>
   <ul>
