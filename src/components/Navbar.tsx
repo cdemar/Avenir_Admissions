@@ -59,6 +59,8 @@ const Navbar = () => {
       setActiveLink("blog");
     } else if (pathname.startsWith("/services")) {
       setActiveLink("services");
+    } else if (pathname.startsWith("/contact")) {
+      setActiveLink("contact");
     } else {
       const observerOptions = {
         root: null,

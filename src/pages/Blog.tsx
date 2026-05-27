@@ -53,19 +53,26 @@ function buildArticleSchema(post: BlogPost) {
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogData.find((p) => p.slug === slug);
-  const related = blogData.filter((p) => p.slug !== slug).slice(-3).reverse();
+  const currentIndex = blogData.findIndex((p) => p.slug === slug);
+  const related = blogData
+    .filter((p) => p.slug !== slug)
+    .sort((a, b) => Math.abs(blogData.indexOf(a) - currentIndex) - Math.abs(blogData.indexOf(b) - currentIndex))
+    .slice(0, 3);
 
   useEffect(() => {
     if (!post) return;
 
+    // Remove any existing article schema (prerendered or from previous navigation)
+    document.querySelectorAll('script[data-schema="article"]').forEach((el) => el.remove());
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.id = "schema-article";
+    script.setAttribute("data-schema", "article");
     script.textContent = JSON.stringify(buildArticleSchema(post));
     document.head.appendChild(script);
 
     return () => {
-      document.getElementById("schema-article")?.remove();
+      script.remove();
     };
   }, [post]);
 

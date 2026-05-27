@@ -92,7 +92,9 @@ function buildJsonLd(route, blogData) {
   }
 
   if (!schema) return "";
-  return `    <script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  const isArticle = schema["@type"] === "Article";
+  const dataAttr = isArticle ? ` data-schema="article"` : "";
+  return `    <script type="application/ld+json"${dataAttr}>${JSON.stringify(schema)}</script>`;
 }
 
 /**
@@ -244,8 +246,10 @@ for (const route of routes) {
 const today = new Date().toISOString().split("T")[0];
 
 const staticUrls = [
-  { loc: `${BASE_URL}/`,      lastmod: today,  priority: "1.0" },
-  { loc: `${BASE_URL}/blogs`, lastmod: today,  priority: "0.8" },
+  { loc: `${BASE_URL}/`,        lastmod: today, priority: "1.0" },
+  { loc: `${BASE_URL}/blogs`,   lastmod: today, priority: "0.8" },
+  { loc: `${BASE_URL}/services`,lastmod: today, priority: "0.8" },
+  { loc: `${BASE_URL}/contact`, lastmod: today, priority: "0.7" },
 ];
 
 const blogUrls = blogData.map((post) => ({
