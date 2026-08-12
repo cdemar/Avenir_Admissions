@@ -7,9 +7,9 @@ const AboutUs = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-3/5 text-center lg:text-left">
-            <h1 className="text-blue-900 font-libre font-bold text-4xl md:text-5xl mb-8">
+            <h2 className="text-blue-900 font-libre font-bold text-4xl md:text-5xl mb-8">
               Why Avenir Admissions
-            </h1>
+            </h2>
             <p className="text-lg md:text-xl leading-relaxed mb-6">
               Led by head College Consultant <b>Aiden Kjeldsen</b>, M.S.Ed.
               Avenir Admissions offers expert, personalized guidance to help

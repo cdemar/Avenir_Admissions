@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
+import Analytics from "./components/Analytics";
 
 /**
  * The full route tree — no Router wrapper so it can be used with
@@ -35,6 +36,8 @@ export function AppContent() {
       </Routes>
       </main>
       <Footer />
+      {/* Placed last so its page_view fires after each page's SEO effect updates document.title */}
+      <Analytics />
     </>
   );
 }

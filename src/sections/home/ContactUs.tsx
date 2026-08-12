@@ -2,7 +2,16 @@ import Cta from "../../components/Cta";
 import { useForm, ValidationError } from "@formspree/react";
 import { FORMSPREE_ID, CAL_LINK, PHONE } from "../../config";
 
-const ContactUs = () => {
+interface ContactUsProps {
+  /**
+   * Heading level for the "Contact Us" title. Use "h1" on the standalone
+   * /contact page, and "h2" (the default) when embedded on the Home page,
+   * which already has its own <h1> in the hero.
+   */
+  as?: "h1" | "h2";
+}
+
+const ContactUs = ({ as: Heading = "h2" }: ContactUsProps) => {
   const [state, handleSubmit] = useForm(FORMSPREE_ID);
 
   return (
@@ -13,9 +22,9 @@ const ContactUs = () => {
       <div className="w-full max-w-7xl mx-auto px-8 lg:px-16 relative z-20">
         <div className="flex flex-col lg:flex-row items-stretch md:justify-between gap-10 lg:gap-0 xl:gap-12">
           <div className="text-center lg:text-left md:w-full lg:w-1/2 xl:w-[45%] flex flex-col justify-center">
-            <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-libre font-bold leading-tight mb-6">
+            <Heading className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-libre font-bold leading-tight mb-6">
               Contact Us
-            </h1>
+            </Heading>
 
             <div className="space-y-2 text-lg lg:text-xl mb-8">
               <p>Interested in working together?</p>

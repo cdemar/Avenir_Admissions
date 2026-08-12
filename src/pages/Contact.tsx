@@ -9,7 +9,7 @@ const Contact = () => {
         description="Get in touch with Avenir Admissions. Book a free consultation or send us a message — we'd love to hear from you."
         url="/contact"
       />
-      <ContactUs />
+      <ContactUs as="h1" />
     </div>
   );
 };

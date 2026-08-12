@@ -169,13 +169,11 @@ function buildPageMeta(route, blogData) {
 // ---------------------------------------------------------------------------
 // 1. Read slugs so we know which routes to render
 // ---------------------------------------------------------------------------
-const blogDataSrc = fs.readFileSync(
-  path.resolve(__dirname, "src/data/blogData.ts"),
-  "utf-8"
-);
-const slugs = [...blogDataSrc.matchAll(/slug:\s*["']([^"']+)["']/g)].map(
-  (m) => m[1]
-);
+// Content is generated from Ghost into blogData.json by scripts/fetch-ghost.mjs
+// (runs earlier in the build). Read slugs straight from it.
+const slugs = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "src/data/blogData.json"), "utf-8")
+).map((p) => p.slug);
 
 const routes = ["/", "/blogs", "/services", "/contact", ...slugs.map((s) => `/blog/${s}`)];
 console.log(`\n🔨  Pre-rendering ${routes.length} routes...\n`);
@@ -272,6 +270,40 @@ ${urlEntries}
 
 fs.writeFileSync(path.resolve(__dirname, "dist/sitemap.xml"), sitemap);
 console.log("   ✓  dist/sitemap.xml");
+
+// ---------------------------------------------------------------------------
+// 6b. Legacy URL redirects
+//     5 posts had mixed-case slugs before content moved to Ghost, which
+//     lowercased them. Emit redirect stubs at the old paths so existing links
+//     and search results resolve to the new lowercase URLs (canonical points
+//     at the target so ranking signals consolidate).
+// ---------------------------------------------------------------------------
+const LEGACY_SLUG_REDIRECTS = {
+  Early_Action_vs_Early_Decision: "early_action_vs_early_decision",
+  Ultimate_Guide_to_the_UC_Schools: "ultimate_guide_to_the_uc_schools",
+  What_is_UC_Davis_Life_Like: "what_is_uc_davis_life_like",
+  "5_Must_Do_Tasks_for_High_School_Seniors": "5_must_do_tasks_for_high_school_seniors",
+  SAT_vs_ACT_What_To_Take: "sat_vs_act_what_to_take",
+};
+
+for (const [oldSlug, newSlug] of Object.entries(LEGACY_SLUG_REDIRECTS)) {
+  const target = `${BASE_URL}/blog/${newSlug}`;
+  const redirectHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting…</title>
+    <link rel="canonical" href="${esc(target)}">
+    <meta http-equiv="refresh" content="0; url=${esc(target)}">
+    <script>location.replace(${JSON.stringify(target)});</script>
+  </head>
+  <body>Redirecting to <a href="${esc(target)}">${esc(target)}</a></body>
+</html>`;
+  const dir = path.resolve(__dirname, "dist/blog", oldSlug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.resolve(dir, "index.html"), redirectHtml);
+  console.log(`   ↪  /blog/${oldSlug} → /blog/${newSlug}`);
+}
 
 // ---------------------------------------------------------------------------
 // 7. Clean up the temporary SSR bundle

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node prerender.mjs",
+    "fetch:ghost": "node scripts/fetch-ghost.mjs",
+    "build": "node scripts/fetch-ghost.mjs && tsc -b && vite build && node prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
