@@ -1,5 +1,5 @@
 /**
- * Ghost → GitHub deploy relay (AWS Lambda, Node.js 20, Function URL).
+ * Ghost → GitHub deploy relay (AWS Lambda, Node.js 24, Function URL).
  *
  * Ghost fires a webhook on content change → this function validates a shared
  * secret and calls GitHub's `repository_dispatch` API, which triggers the

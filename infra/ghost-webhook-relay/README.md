@@ -48,7 +48,7 @@ and the Ghost webhook URL (`?secret=...`).
 **AWS Console → Lambda → Create function → Author from scratch**
 
 - **Name:** `ghost-deploy-relay`
-- **Runtime:** Node.js 20.x
+- **Runtime:** Node.js 24.x (latest stable; 22.x is also fine — avoid the 26.x preview)
 - **Architecture:** arm64 (cheaper) or x86_64 — either is fine
 
 Then:
@@ -105,7 +105,7 @@ cd infra/ghost-webhook-relay
 zip function.zip index.mjs
 aws lambda create-function \
   --function-name ghost-deploy-relay \
-  --runtime nodejs20.x --handler index.handler \
+  --runtime nodejs24.x --handler index.handler \
   --zip-file fileb://function.zip \
   --role arn:aws:iam::<ACCOUNT_ID>:role/<lambda-basic-exec-role> \
   --region us-west-2

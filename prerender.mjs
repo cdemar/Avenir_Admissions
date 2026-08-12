@@ -306,6 +306,27 @@ for (const [oldSlug, newSlug] of Object.entries(LEGACY_SLUG_REDIRECTS)) {
 }
 
 // ---------------------------------------------------------------------------
+// 6c. Branded 404 page
+//     Rendered from the app's catch-all route so CloudFront can serve a proper
+//     not-found page for unknown/removed paths (e.g. an unpublished post).
+//     Configure CloudFront custom error responses: 403 & 404 → /404.html (HTTP 404).
+// ---------------------------------------------------------------------------
+{
+  const appHtml = render("/__not-found__");
+  const title = "Page Not Found | Avenir Admissions";
+  const head = [
+    `    <meta name="description" content="Sorry — this page doesn't exist or may have moved.">`,
+    `    <meta name="robots" content="noindex">`,
+  ].join("\n");
+  const html = template
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
+    .replace("</head>", `${head}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+  fs.writeFileSync(path.resolve(__dirname, "dist/404.html"), html);
+  console.log("   ✓  dist/404.html");
+}
+
+// ---------------------------------------------------------------------------
 // 7. Clean up the temporary SSR bundle
 // ---------------------------------------------------------------------------
 fs.rmSync(path.resolve(__dirname, ".ssr-temp"), { recursive: true, force: true });
