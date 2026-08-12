@@ -11,7 +11,9 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 * * * *"
+    # Once a day at 3pm PST (23:00 UTC). Cron runs in UTC and does NOT shift for
+    # daylight saving, so during PDT (Mar–Nov) this effectively fires at 4pm Pacific.
+    - cron: "0 23 * * *"
   workflow_dispatch:
   repository_dispatch:
     types: [ghost-publish]

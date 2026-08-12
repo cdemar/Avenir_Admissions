@@ -10,6 +10,11 @@ wired into the existing React + Vite site that deploys to S3.
 - **Email now** uses Ghost's built-in newsletter. Delivery (Mailgun) is **included and managed by Ghost Pro** — no separate Mailgun account or bill.
 - A possible **future move** to self-hosted Ghost + **MailerLite** (to cut cost) is outlined at the end.
 
+> **Status (live):** Ghost integration, Google Analytics, the auto-deploy pipeline, and legacy-URL
+> redirects are **built and deployed**. Blog content is served from Ghost at `avenir-admissions.ghost.io`.
+> Remaining optional item: the instant-publish webhook relay (Part 6, Option B). Newsletter/email is
+> not set up yet.
+
 ---
 
 ## What this will cost
@@ -120,44 +125,39 @@ The current posts are already HTML, so this is quick. Two options:
 
 ## Part 6 — Automate publishing (so posts go live on their own)
 
-Because the site is prerendered on S3, a new post needs a **rebuild + redeploy**. Two ways:
+Because the site is prerendered on S3, a new post needs a **rebuild + redeploy**. This is
+implemented in [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml). Each run:
+fetch posts from Ghost → build + prerender → `aws s3 sync` → CloudFront invalidation. It
+triggers on: push to `main`, an **hourly** schedule, manual **Run workflow**, and
+`repository_dispatch` (used by Option B).
 
-**Option A — Scheduled rebuild (simplest, recommended to start)**
-A GitHub Actions cron job rebuilds and deploys on a schedule (e.g. hourly):
+**Secrets to add in GitHub** (repo → Settings → Secrets and variables → Actions) — only **two**:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
 
-```yaml
-# .github/workflows/rebuild.yml
-on:
-  schedule:
-    - cron: '0 * * * *'   # top of every hour
-  workflow_dispatch:        # lets Aiden trigger manually too
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 18 }
-      - run: npm ci && npm run build
-        env:
-          GHOST_URL: ${{ secrets.GHOST_URL }}
-          GHOST_CONTENT_KEY: ${{ secrets.GHOST_CONTENT_KEY }}
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - run: aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} --delete
-      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DIST_ID }} --paths "/*"
-```
+The bucket (`aveniradmissions.com`), region (`us-west-2`), and CloudFront ID (`EKGCNH4EYL9W1`) live in
+the workflow file — they aren't secrets. The Ghost URL + read-only Content key have defaults in
+`scripts/fetch-ghost.mjs`. The IAM user behind those keys needs S3 write to the bucket + CloudFront
+invalidation (policy is in the go-live runbook).
 
-A new post is live within the hour, and Aiden (or you) can hit **Run workflow** to publish instantly.
+**Option A — Scheduled (active now).** The cron runs **once a day at 3pm PST** (`0 23 * * *`), so a new
+post appears by the next daily run. Adjust the `cron:` line to change cadence. **Run workflow** (or a
+push) publishes instantly anytime.
 
-**Option B — Instant on publish (advanced)**
-Add a Ghost **webhook** (Settings → Integrations → your integration → Add webhook, event *"Post published"*) pointing at a tiny relay (AWS Lambda / Cloudflare Worker) that calls GitHub's `repository_dispatch` to trigger the same workflow. Do this later if the hourly delay ever feels too slow.
+**Option B — Instant on publish (built; optional to activate).** A Ghost webhook fires the deploy the
+moment Aiden publishes — no hourly wait, and Aiden never touches GitHub. Code + full setup guide:
+[`infra/ghost-webhook-relay/`](../infra/ghost-webhook-relay/). In short:
 
-**Secrets to add in GitHub** (repo → Settings → Secrets → Actions):
-`GHOST_URL`, `GHOST_CONTENT_KEY`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `S3_BUCKET`, `CF_DIST_ID`.
+1. Create a GitHub **fine-grained token** (repo `Avenir_Admissions`, **Contents: Read and write**).
+2. **Generate a webhook secret** — run `openssl rand -hex 32` in **AWS CloudShell** (the `>_` icon in
+   the AWS console). It's a **one-time value**; your computer does **not** need to stay on afterward —
+   it's stored in AWS + Ghost, both always on.
+3. Create the Lambda (`ghost-deploy-relay`, Node 20), paste `index.mjs`, set the 5 env vars, enable a
+   **Function URL** (auth NONE).
+4. In Ghost → **Settings → Integrations → Website → Add webhook**, event **"Site changed"**, target =
+   the Function URL with `?secret=<your secret>`.
+
+The relay only runs on real content changes, so it's effectively free.
 
 ---
 
@@ -220,14 +220,14 @@ MailerLite list. This is the main thing you're paying ~$9/mo for.
 
 ## Quick checklist
 
-- [ ] Ghost Pro **Starter** account, owner = Aiden's email
+- [x] Ghost Pro account, owner = Aiden's email
+- [x] Content API key + API URL → wired into the build
+- [x] Migrate 13 posts (imported into Ghost)
+- [x] Wire site build to Ghost API
+- [x] GitHub Actions build + deploy to S3/CloudFront, with AWS secrets
+- [x] Legacy mixed-case URLs 301 → new lowercase slugs
+- [x] GA4 Measurement ID (`G-VV3QY9GXQZ`) wired in
 - [ ] *(optional)* custom domain `cms.aveniradmissions.com` via CNAME
-- [ ] Content API key + API URL → give to build
-- [ ] Migrate 13 posts
-- [ ] Wire site build to Ghost API *(me)*
-- [ ] GitHub Actions rebuild + deploy, with secrets *(me)*
-- [ ] Enable newsletter + set sender in Ghost (email delivery already included on Pro)
-- [ ] *(optional)* add SPF/DKIM DNS to send from your own domain
-- [ ] Subscribe form wired to Ghost Members API *(me)*
-- [ ] GA4 Measurement ID → wired in *(me)*
+- [ ] *(optional)* Option B — instant-publish webhook relay (see `infra/ghost-webhook-relay/`)
+- [ ] *(not started)* Email newsletter — enable in Ghost + subscribe form, **or** the future MailerLite route
 - [ ] *(future)* migrate to self-hosted Ghost + MailerLite to cut cost

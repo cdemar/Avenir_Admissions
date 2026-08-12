@@ -23,13 +23,25 @@ The workflow already listens for this: `.github/workflows/deploy.yml` →
 
 ## Step 2 — Make a webhook secret
 
-Generate a long random string (this authenticates Ghost → Lambda):
+Generate a long random string (this authenticates Ghost → Lambda). This is a
+**one-time value** — where you generate it doesn't matter and your computer does
+**not** need to stay on afterward; the string just gets stored in AWS + Ghost,
+both of which are always on.
 
-```bash
-openssl rand -hex 32
-```
+Easiest option — run it in **AWS CloudShell** so no local machine is involved:
 
-Keep it handy — it goes in both the Lambda env and the Ghost webhook URL.
+1. In the AWS Console top bar, click the **CloudShell** icon (`>_`), or search "CloudShell".
+2. In the browser terminal that opens, run:
+   ```bash
+   openssl rand -hex 32
+   ```
+3. Copy the output.
+
+(You can run the same command in any terminal — a password manager's random
+generator works too. It's just a random string.)
+
+Keep it handy — the same value goes in **both** the Lambda env (`WEBHOOK_SECRET`)
+and the Ghost webhook URL (`?secret=...`).
 
 ## Step 3 — Create the Lambda
 
